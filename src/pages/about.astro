@@ -1,0 +1,369 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+import { sanityClient } from "sanity:client";
+import imageUrlBuilder from '@sanity/image-url'
+
+const builder = imageUrlBuilder(sanityClient)
+
+function urlFor(source) {
+    return builder.image(source)
+}
+
+const otherfiles = await sanityClient.fetch( `*[_type == "otherfiles"]` );
+---
+
+<Layout title="Laura Taormina Portfolio - About">
+
+    <main class="about animation-hidden">
+
+        <h1>Hi<span class="dotstyle">.</span> Pleased to meet you<span class="dotstyle">!</span></h1>
+        <div class="container-img hover-shadow">
+            {
+                otherfiles.map((otherfile) => (
+                
+                <img src={urlFor(otherfile.myimageone).url()} class="about-img" alt={otherfile.name}>
+              ))
+            }
+        </div>
+
+        <div class="text-area animation-hidden">
+
+            <h2>I'm Laura<span class="dotstyle">.</span></h2>
+
+            <p>I recently graduated with a Professional Bachelor's Degree in Web design, 
+                Writing and Web development.</p>
+
+            <p>During my studies and my work experiences, I've acquired a variety of skills that allowed me to be versatile.
+                I've worked with agencies and companies alike, and I've delved into different kinds of work and design: 
+                Photography, Graphic design, Branding, UX/UI Design, Web development, Print etc. 
+            </p>
+
+            <p>I have a passion for all forms of design. I like to experiment during my free time and merge
+                my passion with my hobbies: gaming, K-pop and music. 
+            </p>
+
+            <p>I have a background in Business, as I also have a Bachelor in Marketing & Communication. After graduating,
+                I realized I was more suited for more creative endeavors. However, this allows me to have a more strategic vision 
+                of my current work. 
+            </p>
+
+            <p>Thank you for taking the time to read more about me! :)
+            </p>
+
+        </div>
+
+    </main>
+
+    <div class="experiences animation-hidden">
+        <h4>Experiences & Formation<span class="dotstyle">.</span></h4>
+        <ul class="list">
+
+            <li>
+                <hr>
+                <div class="listwrapper animation-hidden">
+                    <h2>2023</h2>
+                    <div class="experiences-txt">
+                        <p>Professional Bachelor's Degree in Digital Professions : Webdesign, Writing, and Development</p>
+                        <p>Belfort-Montbéliard's Institute of Technology — Montbéliard, France</p>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <hr>
+                <div class="listwrapper animation-hidden">
+                    <h2>2022-2023</h2>
+                    <div class="experiences-txt">
+                        <p>Graphic Designer & UX/UI Designer Apprenticeship</p>
+                        <p>Access2tel — Montbéliard, France</p>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <hr>
+                <div class="listwrapper animation-hidden">
+                    <h2>2022</h2>
+                    <div class="experiences-txt">
+                        <p>Web design & Graphic design internship</p>
+                        <p>Lemon Agency — Clermont-Ferrand, France</p>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <hr>
+                <div class="listwrapper animation-hidden">
+                    <h2>2020-2022</h2>
+                    <div class="experiences-txt">
+                        <p>BTEC Higher National Diploma in Multimedia and Internet Professions</p>
+                        <p>Belfort-Montbéliard's Institute of Technology — Montbéliard, France</p>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <hr>
+                <div class="listwrapper animation-hidden">
+                    <h2>2019</h2>
+                    <div class="experiences-txt">
+                        <p>Photograhy, Graphic Design, Community Management Internship</p>
+                        <p>Ancient & Oriental — London, UK</p>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <hr>
+                <div class="listwrapper animation-hidden">
+                    <h2>2018</h2>
+                    <div class="experiences-txt">
+                        <p>Graphic Design Internship</p>
+                        <p>Philor Communication & Printing — Belfort, France</p>
+                    </div>
+                </div>
+            </li>
+
+                <li>
+                    <hr>
+                    <div class="listwrapper animation-hidden">
+                        <h2>2016-2019</h2>
+                        <div class="experiences-txt">
+                            <p>Bachelor Marketing & Communication</p>
+                            <p>ISEG Marketing & Communication School — Strasbourg, France</p>
+                        </div>
+                    </div>
+                </li>
+        </ul>
+    </div>
+
+    <section class="about-quote animation-hidden">
+        <h4>My motto<span class="dotstyle">.</span></h4>
+        <h3><span class="guillemets">“</span>If you don't fail, you're not trying hard enough.<span class="guillemets">”</span></p>
+        <h5>.george lucas</p>
+    </section>
+    
+</Layout>
+
+<style>
+    
+    .about {
+        margin: 8em 2em 2em 2em;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+
+    h1 {
+        color: var(--blue);
+        font-family: 'ZTChintzyExtraBold';
+        text-align:center;
+        font-size: 2.2rem;
+    }
+
+    .container-img {
+        overflow: hidden;
+        text-align: -webkit-center;
+        text-align: center;
+        width: 75vw;
+        transition: box-shadow ease-in-out 1s;
+        animation: floating 3s linear infinite;
+    }
+
+    @keyframes floating {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(5px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .hover-shadow {
+  box-shadow: -1px 2px 20px 0px rgb(21 35 69);
+  -webkit-box-shadow: -1px 2px 20px 0px rgb(21 35 69);
+  -moz-box-shadow: -1px 2px 20px 0px rgb(21 35 69);
+}
+
+    .hover-shadow:hover {
+  box-shadow: 0px 0px 97px -33px rgb(110, 123, 157, 1);
+  -webkit-box-shadow: 0px 0px 97px -33px rgba(110, 123, 157, 1);
+  -moz-box-shadow: 0px 0px 97px -33px rgba(110, 123, 157, 1);
+}
+    
+    .container-img img {
+        object-fit: cover;
+        width: 75vw;
+        height: 20em;
+        transition: transform ease 0.2s;
+    } 
+    
+    .container-img img:hover {
+  transform: scale(1.1);
+}
+
+    .text-area {
+        width:75%;
+        text-align:right;
+        margin-left:15vw;
+        padding: 0.5em;
+        border-left: 1px solid var(--blue);
+    }
+
+    .text-area h2 {
+        color: var(--blue);
+        font-family: 'ZTChintzy';
+        font-size: 2em;
+    } 
+
+    .text-area p {
+        color: var(--beige);
+        font-family: 'NeueRegradeLight';
+        margin-bottom: 1em;
+    }
+
+
+    .experiences {
+        width: -webkit-fill-available;
+        margin: 2em;
+    } li {
+    margin-bottom:15px;
+    } 
+
+    .listwrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--beige);
+    } h2 {
+        font-family: 'NeueRegradeExtrabold';
+        color: var(--cadetgray);
+    } p {
+        font-family: 'NeueRegradeLight';
+        text-align:right;
+    }
+
+    .listwrapper p:nth-child(1) {
+        text-transform: uppercase;
+        font-family: 'NeueRegradeBold';
+    }
+
+    hr {
+    display: block;
+    color: transparent;
+    background: var(--blue);
+    border: none;
+    height: 1px;
+    margin-bottom: 15px;
+    }
+
+    @media (min-width: 650px) {
+        .experiences-txt {
+        width: 75%;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .listwrapper {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .listwrapper p {
+            text-align: left;
+        }
+    }
+
+    .about-quote {
+        margin:2em;
+        text-align: center;
+        min-height:100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2em;
+    } 
+
+    .about-quote h3 {
+        font-size:3.5rem;
+        color: var(--beige);
+        line-height: 1em;
+        margin: 1.5em 0 0.5em 0;
+        font-family: 'ZTChintzyExtraBold';
+    }
+
+    .about-quote h4, 
+    .experiences h4 {
+        font-family: 'NeueRegradeLight';
+        text-transform: uppercase;
+        color: var(--blue);
+        text-align: center;
+        font-size: 2rem;
+        text-decoration: overline;
+        margin-bottom: 1em;
+    }
+
+    .about-quote h5 {
+        font-family: 'NeueRegradeRegular';
+        color: var(--white);
+        text-align:right;
+        margin-right: 2em;
+    }
+
+    .about-quote .guillemets {
+        color: var(--blue);
+    }
+
+    @media screen and (min-width: 1px) 
+	and (max-width: 320px) {
+        .about {
+			margin: 8em 1em 1em 1em;
+		}
+		h1 {
+			font-size: 2rem;
+		}
+		p {
+			font-size: 1rem;
+		}
+        .about-quote {
+            margin: 1em;
+        }
+        .about-quote h3 {
+            font-size: 2.5rem;
+        }
+	}
+
+	@media screen and (min-width: 321px) 
+	and (max-width: 425px) {
+		.about {
+			margin: 8em 1em 1em 1em;
+		}
+		h1 {
+			font-size: var(--h1fz-320px);
+		}
+        .about-quote h3 {
+            font-size: 3rem;
+        }
+	}
+
+	@media screen and (min-width: 426px) 
+	and (max-width: 1024px) {
+		h1 {
+			font-size: var(--h1fz-425px);
+		}
+}
+
+	@media screen (min-width: 1440px) 
+		{
+		h1 {
+			font-size: var(--h1fz-1440px);
+		}
+	}
+
+</style>

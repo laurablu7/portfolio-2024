@@ -1,0 +1,164 @@
+--- 
+import '/Users/lauwatata/portfolio2024/css/bouton.css';
+--- 
+
+<section>
+
+    <div class="section">
+
+        <div class="skills-grid animation-hidden">
+
+        <h4>About</h4>
+
+    <div class="about-txt animation-hidden">
+
+    <p class="bold">Hello! I'm Laura Taormina :)</p>
+    <p>I'm a digital designer based in France. I'm a versatile designer and web developer and 
+        I'm passionate about crafting intuitive digital products. 
+        With a user-centered approach, I transform ideas into seamless experiences.</p>
+    <p>I seek to innovate and I aim to create impactful experiences that exceed expectations.</p>
+    <p>This Portfolio website is a showcase of my work. Please enjoy! </p>
+
+    <a href="/about">
+        <button class="button">Learn more about me</button>
+    </a>
+
+    </div>
+   
+
+</div>
+
+        <div class="skills-grid animation-hidden">
+
+            <h4>Skills</h4>
+
+                <div class="about-txt">
+
+                    <p class="skills">
+                        UI/UX <span class="dotstyle">—</span> Web Design <span class="dotstyle">—</span> 
+                        Branding <span class="dotstyle">—</span> Graphic Design <span class="dotstyle">—</span>
+                        Motion Design<span class="dotstyle">.</span>
+                    </p>
+
+                </div>
+
+    </div>
+
+    </div>
+
+</section>
+
+<style>
+
+section {
+    background-color: var(--darkblack);
+    padding:1em;
+}
+    .section {
+        color: var(--beige);
+        border: 2px var(--blue) solid;
+        margin: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    } 
+
+    .about-txt {
+        width: 50vw;
+    }
+    
+    .about-txt p {
+        font-family: 'NeueRegradeRegular';
+        text-align: left;
+        font-size: 1rem;
+        margin-bottom: 1em;
+    }
+
+    .about-txt p.bold {
+        font-family: 'NeueRegradeBold';
+    }
+
+    .skills-grid {
+        margin: 2em 0 2em 0;
+        display: flex;
+    }
+
+    h4 {
+        font-family: 'NeueRegradeLight';
+        text-transform: uppercase;
+        color: var(--blue);
+        text-align: center;
+        font-size: 2rem;
+        text-decoration: overline;
+        margin: 1em;
+    }
+    
+    .about-txt p.skills {
+       font-size:3rem;
+       width: auto;
+    } 
+
+    .skills:hover, 
+    .skills:focus {
+        
+    }
+
+    .button {
+        color: var(--darkblack);
+    }
+
+    .button:hover {
+        color: var(--beige);
+    }
+
+    @media screen and (min-width: 1px) 
+	and (max-width: 320px) {
+		.section {
+            margin: 0.2em;
+            padding: 1em;
+        }
+        .skills-grid {
+            flex-direction: column;
+        }
+        .about-txt {
+            width: 75vw;
+        }
+        .about-txt p.skills {
+            font-size: 1.7rem;
+        }
+	}
+
+    @media screen and (min-width: 321px) 
+	and (max-width: 675px) {
+		.section {
+            margin: 1em;
+        }
+        .skills-grid {
+            flex-direction: column;
+        }
+        .about-txt {
+            width: 75vw;
+        }
+        .about-txt p.skills {
+            font-size: 2rem;
+        }
+    }
+
+    @media screen and (min-width: 675px) 
+	and (max-width: 980px) {
+        .about-txt {
+        padding: 0 4em 0 4em;
+    }
+    }
+
+    @media (min-width: 980px) {
+        .section {
+            margin: 1.5em;
+        }
+        .about-txt {
+        padding: 0 5em 0 5em;
+    }
+    } 
+
+</style>

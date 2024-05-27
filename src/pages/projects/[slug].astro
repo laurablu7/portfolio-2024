@@ -1,0 +1,351 @@
+---
+import Layout from "../../layouts/Layout.astro"
+
+import '/Users/lauwatata/portfolio2024/css/bouton.css';
+
+import { sanityClient } from "sanity:client";
+import imageUrlBuilder from '@sanity/image-url'
+
+export async function getStaticPaths() {
+    const posts = await sanityClient.fetch(`*[_type == "projects"]`);
+
+    return posts.map(({ number, name, year,
+    category,slug, headimage, subtitle, 
+        description, type, clients, 
+        projecttype, tools, location,
+        showcase }) => {
+        return {
+            params: { slug: slug.current },
+            props: { number, name, year,
+        category, headimage, subtitle, 
+        description, type, clients, 
+        projecttype, tools, location,
+        showcase },
+        };
+    });
+}
+
+const { slug  } = Astro.params;
+const { number, name, year,
+        headimage, category, subtitle, 
+        description, type, clients, 
+        projecttype, tools, location,
+        showcase } = Astro.props;
+
+const builder = imageUrlBuilder(sanityClient)
+
+function urlFor(source) {
+    return builder.image(source)
+}
+
+const projects = await sanityClient.fetch(`*[_type == "projects"]`);
+---
+
+<Layout title={name + ' - Laura Taormina Portfolio'}>
+
+    <main class="projectpage">
+        <div class="project-details animation-hidden">
+
+            <div class="first">
+                <div class="year">
+                    <label>year</label>
+                    <p>{year}</p>
+                </div>
+                <div class="scope">
+                    <label>scope</label>
+                    <div class="project-item">
+                        {type.map((item) => (<p>{item}/ </p>)
+                    )}
+                    </div>
+                </div>
+            </div>
+
+            <div class="second">
+                <div class="left">
+                    <label>category</label>
+                    <p>{category}</p>
+                    <label>client</label>
+                    <p>{clients}</p>
+                </div>
+
+                <div class="right">
+                    <label>tools</label>
+                    <div class="project-item">
+                        {tools.map((item) => (<p>{item}/ </p>)
+                    )}
+                    </div>
+
+                    <label>Project type</label>
+                    <div class="project-item">
+                        {projecttype.map((item) => (<p>{item}/ </p>)
+                                    )}
+                    </div>
+                </div>
+            </div>
+
+            <div class="third">
+                <div class="location">
+                    <label>location</label>
+                    <p>{location}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-description animation-hidden">
+            <h1>{name}<span class="dotstyle">.</span> </h1>
+            <hr>
+            <h2>{subtitle}</h2>
+            <p>{description}</p>
+        </div>
+    </main>
+    <!-- <SliderProject/> -->
+
+    <section>
+
+        <div class="swiper animation-hidden">
+
+          <div class="swiper-wrapper">
+
+            {showcase.map((item) => 
+
+                <div class="swiper-slide">
+
+                    <div class="swiper-zoom-container">
+                
+                
+            (<img alt="" 
+            src={urlFor(item).url()}></img>)
+
+                    </div>
+
+                </div>
+            )}
+    
+          </div>
+    
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+    
+          <div class="swiper-scrollbar"></div>
+        </div>
+      
+        </div>
+
+        <a href="/projects">
+            <button class="button">
+                Back to projects
+            </button>
+          </a>
+      
+      </section>
+</Layout>
+
+<script>
+    // import Swiper bundle with all modules installed
+    import Swiper from 'swiper/bundle';
+    
+    // import styles bundle
+    import 'swiper/css/bundle';
+    
+    // init Swiper:
+    const swiper = new Swiper('.swiper', {
+      effect: 'coverflow',
+      loop: true,
+      coverflowEffect: {
+        rotate: 30,
+        slideShadows: false,
+      },
+      zoom: {
+      maxRatio: 3,
+      minRatio: 1
+    },
+      autoplay: {
+       delay: 5000,
+     },
+    
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+    });
+    </script>
+
+<style>
+    .projectpage {
+        margin: 8em 0 0 0;
+        display: flex;
+        flex-direction: row;
+      
+    }
+
+    section {
+        text-align: center;
+    }
+
+    .project-details {
+        width: 50%;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    .project-description {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 50%;
+        padding: 20px;
+    } 
+    
+    .project-description > h1 {
+        font-family: 'ZTChintzyExtraBold';
+        color: var(--blue);
+        font-size: 3rem;
+    } 
+    
+    .project-description > h2 {
+        font-family: 'NeueRegradeLight';
+        color: var(--beige);
+        font-size: 1.7rem;
+        font-weight:100;
+        padding: 0.5em 0 0.5em 0;
+    } 
+    
+    .project-description > p {
+        font-family: 'NeueRegradeRegular';
+        color: var(--white);
+        line-height: 24px;
+    }
+
+    .project-item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .first, .second {
+        display:flex;
+        flex-direction: row;
+    }
+    
+    .first > .year, 
+    .first > .scope, 
+    .second > .left, 
+    .second > .right, 
+    .third {
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    .first > .year, 
+    .first > .scope, 
+    .second > .left, 
+    .second > .right {
+        width: 50%;
+    }
+    
+    .year {
+        display: flex;
+        flex-direction: column;
+        border: solid 1px var(--blue);
+    }
+    
+    .scope {
+        display: flex;
+        flex-direction: column;  
+        border: solid 1px var(--blue); 
+        border-left: 0; 
+    }
+
+    label {
+        font-family: 'NeueRegradeRegular';
+        color: var(--cadetgray);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .project-details p {
+        color: var(--white);
+        font-family: 'NeueRegradeRegular';
+        text-transform: lowercase;
+    }
+
+    .second p {
+        margin-bottom: 10px;
+    }
+
+    .left {
+        border: 1px solid var(--blue);
+        border-top: 0;
+    } 
+
+    .right {
+        border: 1px solid var(--blue);
+        border-top : 0;
+        border-left: 0;
+    }
+
+    .third {
+        border: 1px solid var(--blue);
+        border-top : 0;
+    }
+
+    @media (max-width: 750px) {
+        .projectpage {
+            flex-direction: column;
+        }
+        .project-details, .project-description {
+            width:100%;
+        }
+
+        .project-description {
+            padding: 0 40px 40px 40px;
+        }
+    } 
+
+    @media (min-width: 1px) and 
+    (max-width: 425px) {
+        .project-details {
+            padding: 10px;
+        }
+        .project-description {
+            padding: 0 10px 10px 10px;
+        }
+        .project-description h1 {
+            font-size: var(--h1fz-425px);
+        }
+    } 
+
+    .swiper {
+          margin-bottom: 2em;
+        }
+    
+        .swiper-slide {
+          background-position: center;
+          background-size: cover;
+        }
+    
+        .swiper-slide img {
+            display: block;
+            height: 70vh;
+            width: 100%;
+            object-fit: contain;
+            cursor: grab;
+        }
+    
+        .button {
+            margin-bottom: 2em;
+            color: var(--raisinblack);
+        }
+    
+    .button:hover {
+      color: var(--beige);
+    }
+
+</style>

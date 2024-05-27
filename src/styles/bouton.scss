@@ -1,0 +1,83 @@
+:root {
+    --navbackgroundcolor: #3E3D3D;
+    --beige: #EDEDED;
+    --raisinblack: #212121;
+    --darkblack: #1B1B1B;
+    --blue: #0040F5;
+    --white: #F8F9F6;
+    --cadetgray: #87A0B2;
+
+    /* Transitions */
+	--theme-transition: 0.2s ease-in-out;
+ }
+
+ button {
+    font-family: 'NeueRegradeBold';
+    position: relative;
+    border: 0;
+    transition: 0.5s;
+    z-index: 1;
+    min-width: 15vw;
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+    line-height: 1;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: var(--beige);
+    color: var(--blue);
+} 
+
+.button {
+    &:before,
+    &:after {
+      box-sizing: inherit;
+      border: 2px solid transparent;
+      width: 0;
+      height: 0;
+      content: "";
+      position: absolute;
+      z-index: -1;
+    }
+    // right & top border
+    &:before {
+      top: 0;
+      left: 0;
+    }
+    // left & bottom border
+    &:after {
+      bottom: 0;
+      right: 0;
+    }
+    &:hover {
+      color: var(--beige);
+      background: transparent;
+
+      &:before,
+      &:after {
+        width: 100%;
+        height: 100%;
+      }
+      &:before {
+        border-top-color: var(--beige);
+        border-right-color: var(--beige);
+        transition: width 0.25s ease-out, height 0.25s ease-out 0.25s; // wait for width
+      }
+      &:after {
+        border-bottom-color: var(--beige);
+        border-left-color: var(--beige);
+        transition: border-color 0s ease-out 0.5s,
+          // wait for :before
+          width 0.25s ease-out 0.5s,
+          height 0.25s ease-out 0.75s; // wait for width
+      }
+    }
+  }
+
+  @media screen and (min-width: 1px) 
+	and (max-width: 320px) {
+		.button {
+      font-size: O.7rem;
+    }
+	}

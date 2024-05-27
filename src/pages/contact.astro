@@ -1,0 +1,134 @@
+---
+import Layout from "../layouts/Layout.astro" 
+---
+
+<Layout title="Laura Taormina Portfolio - Contact">
+    
+    <main class="contact animation-hidden">
+
+        <h1>Let's get in touch<span class="dotstyle">.</span></h1>
+
+        <div class="list-contact">
+            <h4>socials</h4>
+            <ul>
+                <li>
+                    <a href="https://www.linkedin.com/in/laurataormina">Linkedin</a>
+                </li>
+                <li>
+                    <a href="https://www.behance.net/laurataormina">Behance</a>
+                </li>
+                <li>
+                    <a href="https://dribbble.com/laurataormina">dribbble</a>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h4>email</h4>
+
+                <ul>
+                    <li>
+                        <a href="mailto:laura.taormina@gmail.com">laura.taormina@gmail.com</a>
+                    </li>
+                </ul>
+        </div>
+
+    </main>
+
+</Layout>
+
+<style>
+
+.contact {
+    min-height: 100vh;
+    margin: 2em;
+    display:flex;
+    flex-direction:row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 5em;
+}
+
+.contact h1 {
+    font-size:8rem;
+    font-family: 'ZTChintzyExtraBold';
+    color: var(--blue);
+    line-height: 1em;
+}
+
+.list-contact {
+    width: 45%;
+}
+
+.list-contact h4 {
+    font-family: 'NeueRegradeBold';
+    color: var(--white);
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
+.list-contact ul {
+    padding: 1em;
+}
+
+.list-contact ul li {
+    text-transform: lowercase;
+    margin: 1em 0 1em 0;
+    font-size: 1.1rem;
+}
+
+a {
+        font-family: 'NeueRegradeRegular';
+        font-weight: normal;
+        color: var(--beige);
+        text-decoration: 3px solid underline transparent;
+        transition: text-decoration var(--theme-transition);
+    }
+
+a:hover {
+    text-decoration: 3px solid underline;
+}
+
+@media (max-width: 800px) {
+    .contact {
+    margin: 8em 2em 2em 2em;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    text-align: center;
+    }
+    .list-contact {
+    width: 100%;
+    }
+}
+
+
+@media screen and (min-width: 1px) 
+	and (max-width: 320px) {
+        .contact {
+            margin: 8em 1em 1em 1em;
+        }
+		.contact h1 {
+			font-size: 4rem;
+		}
+	}
+
+@media screen and (min-width: 320px) 
+	and (max-width: 425px) {
+        .contact {
+            margin: 8em 1em 1em 1em;
+        }
+		.contact h1 {
+			font-size: 5rem;
+		}
+	}
+
+	@media screen and (min-width: 426px) 
+	and (max-width: 1024px) {
+		.contact h1 {
+			font-size: 6rem;
+		}
+}
+
+</style>

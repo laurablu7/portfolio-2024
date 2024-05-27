@@ -1,0 +1,182 @@
+/* COULEURS */ 
+
+:root {
+    --navbackgroundcolor: #3E3D3D;
+    --beige: #EDEDED;
+    --raisinblack: #212121;
+    --darkblack: #1B1B1B;
+    --blue: #0040F5;
+    --white: #F8F9F6;
+    --cadetgray: #87A0B2;
+
+    /* Transitions */
+	--theme-transition: 0.2s ease-in-out;
+
+    /* Tailles police */
+
+        /*H1*/
+    --h1fz-320px: 2.5rem;
+    --h1fz-425px: 3rem;
+    --h1fz-1042px: 4rem;
+    --h1fz-1440px : 5rem; 
+
+       /* H2 */ 
+    --h2fz-320px: 1.5rem;
+    --h2fz-425px: 1.8rem;
+    --h2fz-1042px: 2.5rem;
+    --h2fz-1440px : 2.7rem;
+
+        /* H3 */ 
+    --h3fz-320px: 1.8rem;
+    --h3fz-425px: 2.1rem;
+    --h3fz-1042px: 2.5rem;
+    --h3fz-1440px : 2.7rem;
+
+        /* p */ 
+    --pfz-320px: 1.1rem;
+    --pfz-425px: 1.1rem;
+    --pfz-1042px: 1.1rem;
+    --pfz-1440px : 1.1rem;
+}
+
+ /* TYPOGRAPHIES */ 
+
+
+@font-face {
+font-family: 'ZTChintzy';
+src: url('/fonts/ZTChintzy/ZTChintzy-Heavy.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'ZTChintzyExtraBold';
+    src: url('/fonts/ZTChintzy/ZTChintzy-ExtraBold.woff') format('woff');
+    }
+
+@font-face {
+font-family: 'NeueRegradeLight';
+src: url('/fonts/NeueRegrade/neue_regrade_light-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'NeueRegradeRegular';
+    src: url('/fonts/NeueRegrade/neue_regrade_regular-webfont.woff') format('woff');
+    }
+
+    @font-face {
+        font-family: 'NeueRegradeBold';
+        src: url('/fonts/NeueRegrade/neue_regrade_bold-webfont.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'NeueRegradeExtrabold';
+            src: url('/fonts/NeueRegrade/neue_regrade_extrabold-webfont.woff') format('woff');
+            }
+
+/* GLOBAL CSS */ 
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    -webkit-font-smoothing : antialiased;
+    cursor: none;
+    scrollbar-width: thin;
+    scrollbar-color: #4A4A4A #1B1B1B;
+}
+
+html {
+    background-color: var(--raisinblack);
+    }
+
+body {
+	min-height: 100%;
+	overflow-x: hidden;
+}
+
+.dotstyle {
+    color: var(--cadetgray);
+}
+
+.bold {
+    font-family: 'NeueRegradeBold';
+}
+
+hr {
+    display: block;
+    color: transparent;
+    background: var(--blue);
+    border: none;
+    height: 1px;
+    margin-bottom: 15px;
+}
+
+/* Transition Pages */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background: var(--cadetgray);
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: left;
+    z-index: 30;
+}
+
+.transition-wipe {
+    transition: .7s cubic-bezier(0,0,.58,1);
+    transform: scaleX(0);
+}
+
+html.is-animating .transition-wipe {
+    transform: scaleX(1);
+    transition: transform 400ms ease-in-out;
+    opacity: 1;
+}
+
+/* .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cadetgray);
+    transform: scale(0);
+    transform-origin: left;
+    z-index: 30;
+}
+
+.transition-wipe {
+    transition: .7s cubic-bezier(0,0,.58,1);
+    transform: scaleX(0);
+}
+
+html.is-animating .transition-wipe {
+    transform: scaleX(1);
+} */
+
+@keyframes spin {
+    from {
+    transform: rotate(0deg);
+        }
+       to {
+    transform: rotate(360deg);
+       }
+}
+
+@keyframes txt-animation {
+    from {
+    transform: translateX(-400px);
+    opacity:0;
+    filter:blur(5px);
+    }
+    to {
+    transform: translateX(0);
+    opacity:1;
+    filter:blur(0px);
+    }
+  }

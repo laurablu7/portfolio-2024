@@ -1,0 +1,185 @@
+--- 
+import '/Users/lauwatata/portfolio2024/src/styles/global.css';
+
+import 'swiper/css';
+
+import '/Users/lauwatata/portfolio2024/css/bouton.css';
+
+import { sanityClient } from "sanity:client";
+import imageUrlBuilder from '@sanity/image-url'
+
+const builder = imageUrlBuilder(sanityClient)
+
+function urlFor(source) {
+    return builder.image(source)
+}
+
+const projects = await sanityClient.fetch( `*[_type == "projects"]` );
+
+--- 
+
+<section>
+  <div class="section-txt animation-hidden">
+        <h2>Latest work<span class="dotstyle">.</span></h2>
+        <a href="/projects">
+          <button class="button">
+              All my work
+          </button>
+        </a>
+</div>
+
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      {
+        projects.map((project) => (
+        
+      <div class="swiper-slide">
+        <a href={'/projects/'+project.slug.current}>
+          <img src={urlFor(project.headimage).url()} alt={project.name}>
+        </a>
+      </div>
+      ))
+    }
+      
+    </div>
+
+    <!-- If we need pagination -->
+    <!-- <div class="swiper-pagination"></div> -->
+  
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div>
+
+   <!--  {
+          projects.map((project) => (
+          <img src={urlFor(project.headimage).url()} alt={project.name}>
+          ))
+        } -->
+
+</section>
+
+<script>
+
+import Swiper from 'swiper/bundle';
+
+import 'swiper/css/bundle';
+
+const swiper = new Swiper('.swiper', {
+effect: 'coverflow',
+  coverflowEffect: {
+    rotate: 30,
+    slideShadows: false,
+  },
+  loop: true,
+  autoplay: {
+   delay: 5000,
+ },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+</script>
+
+<style>
+
+    section {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    } h2 {
+        font-family: 'ZTChintzyExtraBold';
+        text-transform: uppercase;
+        color: var(--blue);
+        font-size: 2.5rem;
+        margin-bottom: 0.5em;
+    } 
+
+    .section-txt {
+      padding: 1em;
+    }
+
+    .button {
+      color: var(--raisinblack);
+    }
+    
+    .button:hover {
+      color: var(--beige);
+    }
+
+    .swiper {
+      width: 100%;
+      height: 80%;
+      margin: 1em 0 2em 0;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+    }
+
+    .swiper-slide img {
+      display: block;
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    cursor: grab;
+    }
+
+
+@media screen and (min-width: 1px) 
+	and (max-width: 320px) {
+		h2 {
+            font-size: var(--h2fz-320px);
+        }
+        .swiper-slide img {
+      height: 30vh;
+    }
+      
+}
+
+@media screen and (min-width: 321px) 
+	and (max-width: 425px) {
+		h2 {
+            font-size: var(--h2fz-425px);
+        }
+}
+
+@media screen and (min-width: 800px) {
+		section {
+      display:flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-txt {
+      display: flex;
+      width: 50vw;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .swiper {
+      width: 60vw;
+      margin:1em;
+    }
+
+    .swiper-slide img {
+      height: 70vh;
+    }
+}
+
+
+</style>

@@ -1,0 +1,110 @@
+--- 
+import '/Users/lauwatata/portfolio2024/css/bouton.css';
+--- 
+
+<footer>
+    <h3>Get in touch with me<span class="dotstyle">.</span></h3>
+    <a href="/contact">
+         <button class="button">Let's get in touch</button>
+    </a>
+    <p class="socials">
+        <a href="https://www.linkedin.com/in/laurataormina">linkedin /</a>
+        <a href="https://dribbble.com/laurataormina">dribbble /</a>
+        <a href="https://www.behance.net/laurataormina">behance</a>
+    </p>
+
+    <div class="footertxt">
+        <div class="footertxtcolumn">
+        <p>Copyright 2024 Laura Taormina. All rights reserved</p>
+        <a href="mailto:laura.taormina@gmail.com">laura.taormina@gmail.com</a>
+    </div>
+    <div class="footertxtcolumn">
+        <p>You may not use my work for A.I. generation.</p>
+    </div>
+
+    </div>
+
+</footer>
+
+<style>
+
+    h3 {
+        font-family: 'ZTChintzyExtraBold';
+        text-align: center;
+        font-size: 2em;
+        text-transform: uppercase;
+    }
+    
+    footer {
+        padding: 3em;
+        background-color: var(--blue);
+        color: var(--beige);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:1.5em;
+    } 
+
+    .footertxt {
+        display:flex;
+        align-items: center;
+        font-size:0.7rem;
+        text-transform: lowercase;
+        justify-content: space-between;
+        width: -webkit-fill-available;
+    }
+
+    .footertxtcolumn {
+        display:flex; 
+        flex-direction: column;
+    }
+    
+    p, a {
+        font-family: 'NeueRegradeRegular';
+        font-weight: normal;
+    }
+
+    a {
+    color:white;
+    text-decoration: 3px solid underline transparent;
+    transition: text-decoration var(--theme-transition);
+} 
+
+a:hover {
+    text-decoration: 3px solid underline;
+}
+
+@media screen and (min-width: 1px) 
+	and (max-width: 320px) {
+		footer {
+            padding: 1em;
+        }
+		h3 {
+            font-size: var(--h3fz-320px);
+        }
+        p.social {
+            font-size: 0.8rem;
+        }
+	}
+
+@media screen and (min-width: 321px) 
+	and (max-width: 425px) {
+        footer {
+            padding: 1em;
+        }
+		h3 {
+            font-size: var(--h3fz-425px);
+        }
+}
+
+    @media (max-width: 650px) {
+        .footertxt {
+            margin-top: 1em;
+            flex-direction:column;
+            gap: 1em;
+            text-align:center;
+        }
+    }
+
+</style>

@@ -1,0 +1,219 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { sanityClient } from "sanity:client";
+import imageUrlBuilder from '@sanity/image-url'
+
+const builder = imageUrlBuilder(sanityClient)
+
+function urlFor(source) {
+    return builder.image(source)
+}
+
+const projects = await sanityClient.fetch( `*[_type == "projects"]` );
+---
+
+<Layout title="Laura Taormina Portfolio - Work">
+    <main class="projects animation-hidden">
+
+        <div class="projectstitle">
+<h1>PROJECTS<span class="dotstyle">.</span></h1> 
+<p class="h1projects">Graphic design, web design, visual identity </span>
+</div>
+
+<ul class="list">
+    {
+        projects.map((project) => (
+        <a href={'/projects/'+project.slug.current}>
+        <li>
+            <hr>
+            <div class="listwrapper">
+                <h2>{project.name}</h2>
+                <div class="projectype">
+                {
+                project.type.map ((item) => (
+                    <p>{item}/</p>
+                )) 
+                }
+                 <img class="imgprojects" src={urlFor(project.headimage).url()} alt={project.name}>
+                </div>
+           
+
+            </div>
+        </li>
+    </a>
+        ))
+    }
+</ul>
+    </main>
+</Layout>
+
+<style>
+
+    .projectstitle {
+        width: 75%;
+    }
+
+.projects {
+    margin: 8em 2em 2em 2em;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    gap: 2em;
+}
+
+h1 {
+		font-size: 4.2rem;
+		text-align: center;
+		font-family: 'ZTChintzy';
+		color: var(--blue);
+		text-transform: uppercase;
+		line-height: 1;
+    } .h1projects {
+        font-family: 'NeueRegradeLight';
+        color: var(--beige);
+        font-size:2.5rem;
+        text-align: center;
+        font-weight: 100;
+        text-transform: uppercase;
+    }
+
+.list {
+    width: -webkit-fill-available;
+    margin: 1em;
+} li {
+   margin-bottom:15px;
+   text-transform: uppercase;
+} span {
+    font-size: x-large;
+}
+
+.listwrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(197, 197, 197);
+} h2 {
+    font-family: 'NeueRegradeExtrabold';
+} p {
+    font-family: 'NeueRegradeLight';
+} 
+
+.imgprojects {
+    /* display:none; */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    bottom: 10em;
+    right: 3em;
+    width: 20vw;
+    animation: floating 3s linear infinite;
+    box-shadow: -1px 2px 20px 0px rgb(46 61 98);
+    -webkit-box-shadow: -1px 2px 20px 0px rgb(46 61 98);
+    -moz-box-shadow: -1px 2px 20px 0px rgb(46 61 98);
+}
+
+    @keyframes floating {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(5px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+.listwrapper.active .imgprojects {
+    opacity: 100;
+   /*  display:block; */
+}
+
+.projectype {
+    display:flex;
+}
+
+.listwrapper:hover {
+    color: var(--white);
+}
+
+a:hover {
+text-decoration: none;
+}
+
+@media screen and (min-width: 1px) 
+	and (max-width: 320px) {
+        .listwrapper  {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        .projects {
+            margin: 8em 0.8em 0.8em 0.8em;
+        }
+        .projectstitle {
+            width: 100%;
+        }
+		.projects h1 {
+			font-size: var(--h1fz-320px);
+		}
+		.h1projects {
+			font-size: 1.3rem;
+		}
+        .projectype {
+            flex-wrap: wrap;
+        }
+        .projectype p {
+            font-size: 0.8rem;
+        }
+	}
+
+	@media screen and (min-width: 321px) 
+	and (max-width: 800px) {
+        .listwrapper  {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        .projects {
+            margin: 8em 1em 1em 1em;
+        }
+        .projectstitle {
+            width: 100%;
+        }
+		.projects h1 {
+			font-size: var(--h1fz-425px);
+		}
+		.h1projects {
+			font-size: 1.6rem;
+		}
+        .projectype {
+            flex-wrap: wrap;
+        }
+        .projectype p {
+            font-size: 0.9rem;
+        }
+	}
+
+	@media screen and (min-width: 426px) 
+	and (max-width: 1042px) {
+		h1 {
+			font-size: var(--h1fz-1042px);
+		}
+}
+
+</style>
+
+<script>
+
+    let listWrapper = document.querySelectorAll(".listwrapper");
+
+    listWrapper.forEach(list => {
+        list.addEventListener('mouseover', () => list.classList.add("active"));
+    });
+
+    listWrapper.forEach(list => {
+        list.addEventListener('mouseout', () => list.classList.remove("active"));
+    });
+
+</script>
